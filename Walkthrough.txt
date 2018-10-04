@@ -1,0 +1,37 @@
+<=== MySQL ===>
+Upload the SQL dump to your phpmyadmin (or other manager)
+
+<=== PHP ===>
+Update the data in config.php to reflect your MySQL database login info
+(Optional) Update "confirmationkey" on line 34 of Generator.php 
+
+Upload the PHP scripts to your web server (or equivalent location)
+Note down the urls for each file (except config.php)
+
+(Optional) Remove Generator.php
+- This is for if you do not want to allow others to generate licenses (they would have to have the right url and confirmationkey but this is just incase)
+-If you do not remove this file you may want to set up extra authentication for it
+
+<=== C# ===>
+Update the data in Login.cs on line 27 & 28 to reflect the urls you just saved
+
+
+<=== Running ===>
+You should now be able to run the c# program with no issues
+
+Register using the register tab
+Login using the login tab
+Redeem a token using the token bot, this will use the same name as what is on the label on the right of the program
+You can generate tokens using the admin tab
+
+
+<=== Links ===>
+-Tutorial and Project my PassiveModding
+-V3R = https://v3rmillion.net/member.php?action=profile&uid=735538
+-Youtube = https://youtube.com/c/passivex
+-Discord = https://discord.me/passive
+-Store = https://rocketr.net/sellers/passivemodding
+
+█▀▀█ █▀▀█ █▀▀ █▀▀ ▀█▀ ▀█░█▀ █▀▀ █▀▄▀█ █▀▀█ █▀▀▄ █▀▀▄ ▀█▀ █▀▀▄ █▀▀▀
+█░░█ █▄▄█ ▀▀█ ▀▀█  █  ░█▄█░ █▀▀ █░▀░█ █░░█ █░░█ █░░█  █  █░░█ █░▀█
+█▀▀▀ ▀░░▀ ▀▀▀ ▀▀▀ ▀▀▀ ░░▀░░ ▀▀▀ ▀░░░▀ ▀▀▀▀ ▀▀▀░ ▀▀▀░ ▀▀▀ ▀░░▀ ▀▀▀▀
