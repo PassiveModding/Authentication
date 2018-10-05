@@ -2,8 +2,10 @@
 Upload the SQL dump to your phpmyadmin (or other manager)
 
 <=== PHP ===>
-Update the data in config.php to reflect your MySQL database login info
-(Optional) Update "confirmationkey" on line 34 of Generator.php 
+Update the data in config.php to reflect the following: 
+-MySQL database login info
+-Email account info (for password recovery emails)
+-Update all other fields
 
 Upload the PHP scripts to your web server (or equivalent location)
 Note down the urls for each file (except config.php)
@@ -13,15 +15,15 @@ Note down the urls for each file (except config.php)
 -If you do not remove this file you may want to set up extra authentication for it
 
 <=== C# ===>
-Update the data in Login.cs on line 27 & 28 to reflect the urls you just saved
-
+In login.cs update the info for authworker and adminauthworker to reflect the file paths you noted down earlier
+Also the last initializer for both is your ENCRYPTION_KEY you set in config previously
 
 <=== Running ===>
 You should now be able to run the c# program with no issues
 
 Register using the register tab
 Login using the login tab
-Redeem a token using the token bot, this will use the same name as what is on the label on the right of the program
+Redeem a token using the token box, this will use the same name as what is on the label on the right of the program
 You can generate tokens using the admin tab
 
 

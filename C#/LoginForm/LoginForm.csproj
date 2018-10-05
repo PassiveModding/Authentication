@@ -58,14 +58,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdminAuthWorker.cs" />
-    <Compile Include="AuthWorker.cs" />
+    <Compile Include="PassiveAuth\AdminAuthWorker.cs" />
+    <Compile Include="PassiveAuth\AuthWorker.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="PassiveAuth\LoginResponse.cs" />
+    <Compile Include="PassiveAuth\RegistrationResponse.cs" />
+    <Compile Include="PassiveAuth\Safe_Transfer.cs" />
+    <Compile Include="PassiveAuth\TokenGenerationResponse.cs" />
+    <Compile Include="PassiveAuth\TokenRedemptionResponse.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Login.resx">

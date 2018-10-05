@@ -40,9 +40,11 @@
             this.LoginUsername = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
+            this.RegisterButton = new MetroFramework.Controls.MetroButton();
+            this.emailbox = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel14 = new MetroFramework.Controls.MetroLabel();
             this.RegisterPasswordConfirm = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
-            this.RegisterButton = new MetroFramework.Controls.MetroButton();
             this.RegisterPassword = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.RegisterUsername = new MetroFramework.Controls.MetroTextBox();
@@ -63,6 +65,10 @@
             this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
             this.daycount = new System.Windows.Forms.NumericUpDown();
             this.AddToken = new MetroFramework.Controls.MetroButton();
+            this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
+            this.RecoverSubmit = new MetroFramework.Controls.MetroButton();
+            this.recoverEmail = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel15 = new MetroFramework.Controls.MetroLabel();
             this.userinfo = new MetroFramework.Controls.MetroLabel();
             this.DataRefresh = new System.Windows.Forms.Timer(this.components);
             this.metroTabControl1.SuspendLayout();
@@ -75,17 +81,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.monthcount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.weekcount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.daycount)).BeginInit();
+            this.metroTabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroTabControl1
             // 
+            this.metroTabControl1.Controls.Add(this.metroTabPage3);
             this.metroTabControl1.Controls.Add(this.metroTabPage1);
             this.metroTabControl1.Controls.Add(this.metroTabPage2);
             this.metroTabControl1.Controls.Add(this.metroTabPage4);
             this.metroTabControl1.Location = new System.Drawing.Point(24, 64);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 2;
-            this.metroTabControl1.Size = new System.Drawing.Size(203, 257);
+            this.metroTabControl1.SelectedIndex = 0;
+            this.metroTabControl1.Size = new System.Drawing.Size(297, 274);
             this.metroTabControl1.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTabControl1.TabIndex = 0;
             this.metroTabControl1.Theme = MetroFramework.MetroThemeStyle.Dark;
@@ -107,7 +115,7 @@
             this.metroTabPage1.HorizontalScrollbarSize = 10;
             this.metroTabPage1.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage1.Name = "metroTabPage1";
-            this.metroTabPage1.Size = new System.Drawing.Size(195, 215);
+            this.metroTabPage1.Size = new System.Drawing.Size(289, 232);
             this.metroTabPage1.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTabPage1.TabIndex = 0;
             this.metroTabPage1.Text = "Login";
@@ -281,9 +289,11 @@
             // 
             // metroTabPage2
             // 
+            this.metroTabPage2.Controls.Add(this.RegisterButton);
+            this.metroTabPage2.Controls.Add(this.emailbox);
+            this.metroTabPage2.Controls.Add(this.metroLabel14);
             this.metroTabPage2.Controls.Add(this.RegisterPasswordConfirm);
             this.metroTabPage2.Controls.Add(this.metroLabel5);
-            this.metroTabPage2.Controls.Add(this.RegisterButton);
             this.metroTabPage2.Controls.Add(this.RegisterPassword);
             this.metroTabPage2.Controls.Add(this.metroLabel3);
             this.metroTabPage2.Controls.Add(this.RegisterUsername);
@@ -293,7 +303,7 @@
             this.metroTabPage2.HorizontalScrollbarSize = 10;
             this.metroTabPage2.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage2.Name = "metroTabPage2";
-            this.metroTabPage2.Size = new System.Drawing.Size(195, 215);
+            this.metroTabPage2.Size = new System.Drawing.Size(289, 232);
             this.metroTabPage2.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTabPage2.TabIndex = 1;
             this.metroTabPage2.Text = "Register";
@@ -302,6 +312,64 @@
             this.metroTabPage2.VerticalScrollbarBarColor = true;
             this.metroTabPage2.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage2.VerticalScrollbarSize = 10;
+            // 
+            // RegisterButton
+            // 
+            this.RegisterButton.Location = new System.Drawing.Point(4, 202);
+            this.RegisterButton.Name = "RegisterButton";
+            this.RegisterButton.Size = new System.Drawing.Size(185, 23);
+            this.RegisterButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.RegisterButton.TabIndex = 11;
+            this.RegisterButton.Text = "Register";
+            this.RegisterButton.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.RegisterButton.UseSelectable = true;
+            this.RegisterButton.UseStyleColors = true;
+            this.RegisterButton.Click += new System.EventHandler(this.RegisterButton_Click);
+            // 
+            // emailbox
+            // 
+            // 
+            // 
+            // 
+            this.emailbox.CustomButton.Image = null;
+            this.emailbox.CustomButton.Location = new System.Drawing.Point(163, 1);
+            this.emailbox.CustomButton.Name = "";
+            this.emailbox.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.emailbox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.emailbox.CustomButton.TabIndex = 1;
+            this.emailbox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.emailbox.CustomButton.UseSelectable = true;
+            this.emailbox.CustomButton.Visible = false;
+            this.emailbox.Lines = new string[0];
+            this.emailbox.Location = new System.Drawing.Point(4, 173);
+            this.emailbox.MaxLength = 32767;
+            this.emailbox.Name = "emailbox";
+            this.emailbox.PasswordChar = '\0';
+            this.emailbox.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.emailbox.SelectedText = "";
+            this.emailbox.SelectionLength = 0;
+            this.emailbox.SelectionStart = 0;
+            this.emailbox.ShortcutsEnabled = true;
+            this.emailbox.Size = new System.Drawing.Size(185, 23);
+            this.emailbox.Style = MetroFramework.MetroColorStyle.Blue;
+            this.emailbox.TabIndex = 15;
+            this.emailbox.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.emailbox.UseSelectable = true;
+            this.emailbox.UseStyleColors = true;
+            this.emailbox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.emailbox.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // metroLabel14
+            // 
+            this.metroLabel14.AutoSize = true;
+            this.metroLabel14.Location = new System.Drawing.Point(4, 150);
+            this.metroLabel14.Name = "metroLabel14";
+            this.metroLabel14.Size = new System.Drawing.Size(44, 19);
+            this.metroLabel14.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroLabel14.TabIndex = 14;
+            this.metroLabel14.Text = "Email:";
+            this.metroLabel14.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroLabel14.UseStyleColors = true;
             // 
             // RegisterPasswordConfirm
             // 
@@ -348,19 +416,6 @@
             this.metroLabel5.Text = "Confirm Password:";
             this.metroLabel5.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.metroLabel5.UseStyleColors = true;
-            // 
-            // RegisterButton
-            // 
-            this.RegisterButton.Location = new System.Drawing.Point(3, 153);
-            this.RegisterButton.Name = "RegisterButton";
-            this.RegisterButton.Size = new System.Drawing.Size(185, 23);
-            this.RegisterButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.RegisterButton.TabIndex = 11;
-            this.RegisterButton.Text = "Register";
-            this.RegisterButton.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.RegisterButton.UseSelectable = true;
-            this.RegisterButton.UseStyleColors = true;
-            this.RegisterButton.Click += new System.EventHandler(this.RegisterButton_Click);
             // 
             // RegisterPassword
             // 
@@ -475,7 +530,7 @@
             this.metroTabPage4.HorizontalScrollbarSize = 10;
             this.metroTabPage4.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage4.Name = "metroTabPage4";
-            this.metroTabPage4.Size = new System.Drawing.Size(195, 215);
+            this.metroTabPage4.Size = new System.Drawing.Size(289, 232);
             this.metroTabPage4.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTabPage4.TabIndex = 3;
             this.metroTabPage4.Text = "Admin";
@@ -697,10 +752,88 @@
             this.AddToken.UseStyleColors = true;
             this.AddToken.Click += new System.EventHandler(this.AddToken_Click);
             // 
+            // metroTabPage3
+            // 
+            this.metroTabPage3.Controls.Add(this.RecoverSubmit);
+            this.metroTabPage3.Controls.Add(this.recoverEmail);
+            this.metroTabPage3.Controls.Add(this.metroLabel15);
+            this.metroTabPage3.HorizontalScrollbarBarColor = true;
+            this.metroTabPage3.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPage3.HorizontalScrollbarSize = 10;
+            this.metroTabPage3.Location = new System.Drawing.Point(4, 38);
+            this.metroTabPage3.Name = "metroTabPage3";
+            this.metroTabPage3.Size = new System.Drawing.Size(289, 232);
+            this.metroTabPage3.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTabPage3.TabIndex = 4;
+            this.metroTabPage3.Text = "Recover";
+            this.metroTabPage3.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroTabPage3.UseStyleColors = true;
+            this.metroTabPage3.VerticalScrollbarBarColor = true;
+            this.metroTabPage3.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPage3.VerticalScrollbarSize = 10;
+            // 
+            // RecoverSubmit
+            // 
+            this.RecoverSubmit.Location = new System.Drawing.Point(3, 52);
+            this.RecoverSubmit.Name = "RecoverSubmit";
+            this.RecoverSubmit.Size = new System.Drawing.Size(185, 23);
+            this.RecoverSubmit.Style = MetroFramework.MetroColorStyle.Blue;
+            this.RecoverSubmit.TabIndex = 16;
+            this.RecoverSubmit.Text = "Recover";
+            this.RecoverSubmit.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.RecoverSubmit.UseSelectable = true;
+            this.RecoverSubmit.UseStyleColors = true;
+            this.RecoverSubmit.Click += new System.EventHandler(this.RecoverSubmit_Click);
+            // 
+            // recoverEmail
+            // 
+            // 
+            // 
+            // 
+            this.recoverEmail.CustomButton.Image = null;
+            this.recoverEmail.CustomButton.Location = new System.Drawing.Point(163, 1);
+            this.recoverEmail.CustomButton.Name = "";
+            this.recoverEmail.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.recoverEmail.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.recoverEmail.CustomButton.TabIndex = 1;
+            this.recoverEmail.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.recoverEmail.CustomButton.UseSelectable = true;
+            this.recoverEmail.CustomButton.Visible = false;
+            this.recoverEmail.Lines = new string[0];
+            this.recoverEmail.Location = new System.Drawing.Point(3, 23);
+            this.recoverEmail.MaxLength = 32767;
+            this.recoverEmail.Name = "recoverEmail";
+            this.recoverEmail.PasswordChar = '\0';
+            this.recoverEmail.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.recoverEmail.SelectedText = "";
+            this.recoverEmail.SelectionLength = 0;
+            this.recoverEmail.SelectionStart = 0;
+            this.recoverEmail.ShortcutsEnabled = true;
+            this.recoverEmail.Size = new System.Drawing.Size(185, 23);
+            this.recoverEmail.Style = MetroFramework.MetroColorStyle.Blue;
+            this.recoverEmail.TabIndex = 18;
+            this.recoverEmail.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.recoverEmail.UseSelectable = true;
+            this.recoverEmail.UseStyleColors = true;
+            this.recoverEmail.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.recoverEmail.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // metroLabel15
+            // 
+            this.metroLabel15.AutoSize = true;
+            this.metroLabel15.Location = new System.Drawing.Point(3, 0);
+            this.metroLabel15.Name = "metroLabel15";
+            this.metroLabel15.Size = new System.Drawing.Size(44, 19);
+            this.metroLabel15.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroLabel15.TabIndex = 17;
+            this.metroLabel15.Text = "Email:";
+            this.metroLabel15.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroLabel15.UseStyleColors = true;
+            // 
             // userinfo
             // 
             this.userinfo.AutoSize = true;
-            this.userinfo.Location = new System.Drawing.Point(233, 64);
+            this.userinfo.Location = new System.Drawing.Point(327, 64);
             this.userinfo.Name = "userinfo";
             this.userinfo.Size = new System.Drawing.Size(71, 19);
             this.userinfo.Style = MetroFramework.MetroColorStyle.Blue;
@@ -718,7 +851,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(460, 335);
+            this.ClientSize = new System.Drawing.Size(719, 361);
             this.Controls.Add(this.userinfo);
             this.Controls.Add(this.metroTabControl1);
             this.Name = "Login";
@@ -738,6 +871,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.monthcount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.weekcount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.daycount)).EndInit();
+            this.metroTabPage3.ResumeLayout(false);
+            this.metroTabPage3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -781,6 +916,12 @@
         private System.Windows.Forms.NumericUpDown weekcount;
         private MetroFramework.Controls.MetroLabel metroLabel13;
         private System.Windows.Forms.NumericUpDown level;
+        private MetroFramework.Controls.MetroTextBox emailbox;
+        private MetroFramework.Controls.MetroLabel metroLabel14;
+        private MetroFramework.Controls.MetroTabPage metroTabPage3;
+        private MetroFramework.Controls.MetroButton RecoverSubmit;
+        private MetroFramework.Controls.MetroTextBox recoverEmail;
+        private MetroFramework.Controls.MetroLabel metroLabel15;
     }
 }
 

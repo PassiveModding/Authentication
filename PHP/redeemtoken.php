@@ -5,7 +5,7 @@ if (isset($_POST['username']) and isset($_POST['token']))
 {
     // Start the session and include the config
     session_start();
-    require('config.php');
+    require('Config/config.php');
 
     // Prepare the selection to avoid sql injection issues
     $stmt = $connection->prepare("SELECT * FROM `users` WHERE username= ? ");
@@ -30,9 +30,9 @@ if (isset($_POST['username']) and isset($_POST['token']))
 
             // If the current expiry time is less that the current time
             // Ensure to use the most up to date time
-            if(strtotime($userrow['expirytime']) > time())
+            if(strtotime($userrow['expiry_date']) > time())
             {
-                $timetoupdate = strtotime($userrow['expirytime']);
+                $timetoupdate = strtotime($userrow['expiry_date']);
             }
             else
             {
@@ -66,19 +66,21 @@ if (isset($_POST['username']) and isset($_POST['token']))
             $date = date('Y-m-d H:i:s', $timetoupdate + $addontime);
 
             // Update the user's row
-            $updatestmt = $connection->prepare("UPDATE `users` SET `expirytime` = ?, `level` = ? WHERE username = ? ");
+            $updatestmt = $connection->prepare("UPDATE `users` SET `expiry_date` = ?, `level` = ? WHERE username = ? ");
             $updatestmt->bind_param("sis", $date, $tokenrow['level'], $_POST['username']);
             $updatestmt->execute();
 
+            $response->Success = true;
             $response->SuccessMessage = "Updated Expiry Time";
-			$response->UserName = $userrow['username'];
-            $response->Id = $userrow['id'];
-            
-            // Ensure to update the returned expiry time and access level
-            // This avoids having to query the database again 
-			$response->ExpiryTime = $date;
-            $response->AccessLevel = $tokenrow['level'];
-            
+            $response->UserName = $userrow['username'];
+            $response->Token_Redeemed = $_POST['token'];
+            $response->Expiry_Date = $date;
+            $response->AccessLevel = $userrow['level'];
+            $response->Years = $tokenrow['years'];
+            $response->Months = $tokenrow['months'];
+            $response->Weeks = $tokenrow['weeks'];
+            $response->Days = $tokenrow['days'];
+
             // Delete the token that was redeemed
             $removestmt = $connection->prepare("DELETE FROM `tokens` WHERE token = ? ");
             $removestmt->bind_param("s", $_POST['token']);
@@ -87,22 +89,27 @@ if (isset($_POST['username']) and isset($_POST['token']))
         else
         {
             $response->ErrorMessage = "Invalid token";
+            $response->Success = false;
         }
 	}
 	else
 	{		
-		$response->ErrorMessage = "Invalid Username";
+        $response->ErrorMessage = "Invalid Username";
+        $response->Success = false;
 	}	
 }
 else
 {
-	$response->ErrorMessage = "Invalid Parameters provided";
+    $response->ErrorMessage = "Invalid Parameters provided";
+    $response->Success = false;
 }
 
-// Return the updated user data OR an error message
+// Respond with either the error message or relevant user details
 if (isset($response))
 {
-	echo json_encode($response);
+	$text = json_encode($response);
+	$crypt = openssl_encrypt($text, 'AES-256-CBC', ENCRYPT_KEY);
+	echo($crypt);
 }
 
 ?>

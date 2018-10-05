@@ -3,9 +3,9 @@
     using System;
     using System.Windows.Forms;
 
-    using MetroFramework.Forms;
-
     using PassiveAuth;
+
+    using MetroFramework.Forms;
 
     /// <summary>
     /// An example form demonstrating usage of PassiveAuth
@@ -24,8 +24,17 @@
         /// <summary>
         /// Initialize the worker and admin-worker classes using your urls that point to your login.register/redeem/generator files
         /// </summary>
-        public AuthWorker Worker { get; set; } = new AuthWorker("https://mysite.com/login.php", "https://mysite.com/register.php", "https://mysite.com/redeemtoken.php");
-        public AdminAuthWorker AdminWorker { get; set; } = new AdminAuthWorker("https://mysite.com/generator.php");
+        public AuthWorker Worker { get; set; } = new AuthWorker(
+            "http://localhost/php_deploy/login.php", 
+            "http://localhost/php_deploy/register.php",
+            "http://localhost/php_deploy/redeemtoken.php", 
+            "http://localhost/php_deploy/Recovery/recover.php",
+            "ANY_RANDOM_STRING");
+        public AdminAuthWorker AdminWorker { get; set; } = new AdminAuthWorker(
+            "http://localhost/php_deploy/Admin/generator.php",
+            "ANY_RANDOM_STRING");
+
+        public LoginResponse CurrentLoginResponse { get; set; }
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
@@ -33,6 +42,8 @@
             {
                 // Attempts to login using the provided login credentials
                 var loginResult = Worker.Login(LoginUsername.Text, LoginPassword.Text);
+
+                CurrentLoginResponse = loginResult;
 
                 if (loginResult.UserName != null)
                 {
@@ -54,7 +65,7 @@
             try
             {
                 // Try to register using the provided username and password
-                var registerResult = Worker.Register(RegisterUsername.Text, RegisterPassword.Text, RegisterPasswordConfirm.Text);
+                var registerResult = Worker.Register(RegisterUsername.Text, RegisterPassword.Text, RegisterPasswordConfirm.Text, emailbox.Text);
 
                 if (registerResult.ErrorMessage == null)
                 {
@@ -74,7 +85,7 @@
         private void timer1_Tick(object sender, EventArgs e)
         {
             // Refreshes the userinfo label with the most current data
-            userinfo.Text = $"Username: {Worker.CurrentResponse?.UserName}\n" + $"ID: {Worker.CurrentResponse?.Id}\n" + $"EXPIRY: {Worker.CurrentResponse?.ExpiryTime}";
+            userinfo.Text = $"Username: {CurrentLoginResponse?.UserName}\n" + $"ID: {CurrentLoginResponse?.Id}\n" + $"EXPIRY: {CurrentLoginResponse?.Expiry_Date}";
         }
 
         private void AddToken_Click(object sender, EventArgs e)
@@ -106,7 +117,7 @@
             {
                 // Try to redeem a token on the provided username
                 // NOTE: The username is being pulled from the current-response, you should probably change this in the case that you aren't logged in or want to apply these to a specific account
-                var res = Worker.Redeem(Worker.CurrentResponse.UserName, TokenBox.Text);
+                var res = Worker.Redeem(LoginUsername.Text, TokenBox.Text);
 
                 if (res.ErrorMessage != null)
                 {
@@ -116,6 +127,18 @@
                 {
                     MessageBox.Show(res.SuccessMessage);
                 }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.ToString());
+            }
+        }
+
+        private void RecoverSubmit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Worker.Recover(recoverEmail.Text);
             }
             catch (Exception exception)
             {
