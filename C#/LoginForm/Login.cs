@@ -45,7 +45,7 @@
 
                 CurrentLoginResponse = loginResult;
 
-                if (loginResult.UserName != null)
+                if (loginResult.Success)
                 {
                     MessageBox.Show($"[{loginResult.Id}] Logged In");
                 }
@@ -67,7 +67,7 @@
                 // Try to register using the provided username and password
                 var registerResult = Worker.Register(RegisterUsername.Text, RegisterPassword.Text, RegisterPasswordConfirm.Text, emailbox.Text);
 
-                if (registerResult.ErrorMessage == null)
+                if (registerResult.Success)
                 {
                     MessageBox.Show(registerResult.SuccessMessage);
                 }
@@ -95,7 +95,7 @@
                 // Sends all the token creation data to admin-auth-worker
                 var res = AdminWorker.AddToken((int)yearcount.Value, (int)monthcount.Value, (int)weekcount.Value, (int)daycount.Value, (int)licquantity.Value, (int)level.Value, addSecurity.Text);
 
-                if (res.ErrorMessage == null)
+                if (res.Success)
                 {
                     MessageBox.Show("The following licenses have been copied to the clipboard:\n" + string.Join("\n", res.TokenList));
                     Clipboard.SetText(string.Join("\n", res.TokenList));
@@ -119,13 +119,14 @@
                 // NOTE: The username is being pulled from the current-response, you should probably change this in the case that you aren't logged in or want to apply these to a specific account
                 var res = Worker.Redeem(LoginUsername.Text, TokenBox.Text);
 
-                if (res.ErrorMessage != null)
+                if (res.Success)
                 {
-                    MessageBox.Show(res.ErrorMessage);
+                    MessageBox.Show(res.SuccessMessage);
+                    CurrentLoginResponse.Expiry_Date = res.Expiry_Date;
                 }
                 else
                 {
-                    MessageBox.Show(res.SuccessMessage);
+                    MessageBox.Show(res.ErrorMessage);
                 }
             }
             catch (Exception exception)
