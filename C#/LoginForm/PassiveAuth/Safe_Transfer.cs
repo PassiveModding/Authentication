@@ -85,13 +85,14 @@
                 throw new ArgumentNullException("iv");
             }
 
+
             // Declare the string used to hold
             // the decrypted text.
             string plaintext;
 
             // Create a RijndaelManaged object
             // with the specified key and IV.
-            var aesAlg = new RijndaelManaged { Mode = CipherMode.CBC, Padding = PaddingMode.None, KeySize = 256, BlockSize = 128, Key = key, IV = iv };
+            var aesAlg = new RijndaelManaged { Mode = CipherMode.CBC, Padding = PaddingMode.PKCS7, KeySize = 256, BlockSize = 128, Key = key, IV = iv };
 
             // Create a decryptor to perform the stream transform.
             ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);

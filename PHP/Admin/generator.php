@@ -27,56 +27,45 @@ if (isset($_POST['years']) and isset($_POST['months']) and isset($_POST['weeks']
     {
         $response->ErrorMessage = "Time, User Level and Quantity must have feasable values";
         $response->Success = false;
+        return encodeobject($response);
     }
-    else
+
+    //This is just a small extra step to ensure that only people who know about the generator and can confirm this value are able to create licenses
+    if ($_POST['verification'] != GENERATOR_VERIFY)
     {
-        //You may want to consider changing confirmationkey to something more secure
-        //This is just a small extra step to ensure that only people who know about the generator and can confirm this value are able to create licenses
-        if ($_POST['verification'] == GENERATOR_VERIFY)
-        {
-            // Prepare and setup the statement to avoid sql injection risks
-            $stmt = $connection->prepare("INSERT INTO `tokens` (`token`,`years`,`months`,`weeks`,`days`,`level`) VALUES ( ? , ? , ? , ? , ? , ? )");
-            $stmt->bind_param('siiiii', $token, $_POST['years'], $_POST['months'], $_POST['weeks'], $_POST['days'], $_POST['userlevel']);
-
-            $licarray = array();
-
-            for ($i = 0; $i < $_POST['quantity']; $i++)
-            {
-                //For each license generate a new, unique serial
-                //NOTE: You may want to consider adding more checks to ensure that in the
-                //      Unlikely case that a dupe license is generated it would be filtered out
-                $token = generate_serial();
-                $stmt->execute();
-                array_push($licarray, $token);
-            }
-
-            $response->TokenList = $licarray;
-            $response->SuccessMessage = $_POST['quantity']." Tokens generated successfully";
-            $response->Success = true;
-            $response->Years = $_POST['years'];
-            $response->Months = $_POST['months'];
-            $response->Weeks = $_POST['weeks'];
-            $response->Days = $_POST['days'];
-            $response->Level = $_POST['userlevel'];
-        }
-        else
-        {
-            $response->ErrorMessage = "Invalid parameters specified";
-            $response->Success = false;
-        }
+        $response->ErrorMessage = "Invalid parameters specified";
+        $response->Success = false;
+        return encodeobject($response);
     }
-}
-else
-{
-    $response->ErrorMessage = "Invalid parameters specified";
-    $response->Success = false;
+
+    // Prepare and setup the statement to avoid sql injection risks
+    $stmt = $connection->prepare("INSERT INTO `tokens` (`token`,`years`,`months`,`weeks`,`days`,`level`) VALUES ( ? , ? , ? , ? , ? , ? )");
+    $stmt->bind_param('siiiii', $token, $_POST['years'], $_POST['months'], $_POST['weeks'], $_POST['days'], $_POST['userlevel']);
+
+    $licarray = array();
+
+    for ($i = 0; $i < $_POST['quantity']; $i++)
+    {
+        //For each license generate a new, unique serial
+        //NOTE: You may want to consider adding more checks to ensure that in the
+        //      Unlikely case that a dupe license is generated it would be filtered out
+        $token = generate_serial();
+        $stmt->execute();
+        array_push($licarray, $token);
+    }
+
+    $response->TokenList = $licarray;
+    $response->SuccessMessage = $_POST['quantity']." Tokens generated successfully";
+    $response->Success = true;
+    $response->Years = $_POST['years'];
+    $response->Months = $_POST['months'];
+    $response->Weeks = $_POST['weeks'];
+    $response->Days = $_POST['days'];
+    $response->Level = $_POST['userlevel'];
+    return encodeobject($response);    
 }
 
-// Respond with either the error message or relevant user details
-if (isset($response))
-{
-	$text = json_encode($response);
-	$crypt = openssl_encrypt($text, 'AES-256-CBC', ENCRYPT_KEY);
-	echo($crypt);
-}
+$response->ErrorMessage = "Invalid parameters specified";
+$response->Success = false;
+return encodeobject($response);
 ?>

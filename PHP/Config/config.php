@@ -42,4 +42,13 @@ if (!$select_db)
     // or you have not created the database yet
     die("Database Selection Failed" . mysqli_error($connection));
 }
+
+function encodeobject($content_to_encode) {
+    if (isset($content_to_encode))
+    {
+        $text = json_encode($content_to_encode);
+        $crypt = base64_encode(openssl_encrypt($text, 'AES-256-CBC', ENCRYPT_KEY, OPENSSL_RAW_DATA));
+        echo $crypt;
+    }
+}
 ?>
