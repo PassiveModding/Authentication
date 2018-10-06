@@ -29,7 +29,7 @@ if (isset($_POST['email']))
 
     $time = time();
 
-    $reset = password_hash($time, PASSWORD_BCRYPT);
+    $reset = bin2hex(random_bytes(16));
 
     // This is the reset link that we will be using to reset the user's password
     // Please change the href to your website in order for this to work
