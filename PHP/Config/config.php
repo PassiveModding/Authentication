@@ -1,30 +1,60 @@
 <?php
+//------------------------------//
+//     SOFTWARE/PRODUCT INFO    //
+//------------------------------//
+define('SOFTWARE_NAME', 'MY_SOFTWARE_NAME');
+
+//------------------------------//
+//        DATABASE INFO         //
+//------------------------------//
 // Your server url it mydatabase.website.com
 // You may need to specify a port if the server is at a location different to your files
-define('DB_SERVER', 'PUT SERVER URL HERE');
+define('DB_SERVER', 'PUT_SERVER_URL_HERE');
 // Your server login username and password
 // This account must have update, insert, delete and select permissions
-define('DB_USERNAME', 'PUT LOGIN USERNAME HERE');
-define('DB_PASSWORD', 'PUT LOGIN PASSWORD HERE');
+define('DB_USERNAME', 'LOGIN_USERNAME_HERE');
+define('DB_PASSWORD', 'LOGIN_PASSWORD_HERE');
 // Your server database name, ie. passive_database
-define('DB_DATABASE', 'PUT DATABASE NAME HERE');
-
-// Update this content with the information that will be used for password recovery emails
-define('RESET_EMAIL', 'myemail@mail.com');
-define('RESET_EMAIL_DISPLAYNAME', 'NAME_HERE');
-define('RESET_EMAIL_SUBJECT', 'SUBJECT_HERE');
-define('RESET_EMAIL_PASSWORD', 'PASSWORD_GOES_HERE');
-define('RESET_EMAIL_HOST', 'HOST_HERE');
-define('RESET_EMAIL_PORT', 'POST_HERE');
+define('DB_DATABASE', 'DATABASE_NAME_HERE');
 
 // Update this with a secure key that you want to encrypt your data with (this will be the same key you use in the c# app)
 define('ENCRYPT_KEY', 'ANY_RANDOM_STRING');
 
-// Update this with the relative URLs of files
-define('RESET_PHP_URL', 'http://path/to/reset.php');
+//------------------------------//
+//       RESET MAIL INFO        //
+//------------------------------//
+// Update this content with the information that will be used for password recovery emails
+define('ALLOW_EMAIL_ACCOUNT_RECOVERY', true);
+define('RESET_EMAIL', 'RECOVERY@WEBSITE.COM');
+define('RESET_EMAIL_PASSWORD', 'RESET_EMAIL_PASSWORD_HERE');
+define('RESET_EMAIL_HOST', 'EMAIL_HOST_HERE');
+define('RESET_EMAIL_PORT', 'EMAIL_PORT_HERE');
 
+define('RESET_EMAIL_DISPLAYNAME', SOFTWARE_NAME.' Password Recovery');
+define('RESET_EMAIL_SUBJECT', 'Reset your '.SOFTWARE_NAME.' Password');
+// Update this with the relative URLs of files
+define('RESET_PHP_URL', 'reset.php URL_HERE');
+
+//------------------------------//
+//    ADMIN/GENERATION INFO     //
+//------------------------------//
 // Update this with the verification value you want to use for generating new tokens
 define('GENERATOR_VERIFY', 'VALUE_HERE');
+
+//------------------------------//
+//   ACCOUNT CONFIRMATION INFO  //
+//------------------------------//
+define('ALLOW_EMAIL_ACCOUNT_CONFIRMATION', true);
+define('CONFIRM_EMAIL', 'CONFIRM@WEBSITE.COM');
+define('CONFIRM_EMAIL_PASSWORD', 'CONFIRM_EMAIL_PASSWORD_HERE');
+define('CONFIRM_EMAIL_HOST', 'EMAIL_HOST_HERE');
+define('CONFIRM_EMAIL_PORT', 'EMAIL_PASSWORD_HERE');
+
+define('CONFIRM_EMAIL_DISPLAYNAME', SOFTWARE_NAME.' Confirmation');
+define('CONFIRM_EMAIL_SUBJECT', 'Confirm your '.SOFTWARE_NAME.' Account');
+
+// Update this with the relative URLs of files
+define('CONFIRM_PHP_URL', 'confirm_registration.php URL_HERE');
 
 // Attempt to connect to the server
 $connection = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD);
@@ -47,7 +77,7 @@ function encodeobject($content_to_encode) {
     if (isset($content_to_encode))
     {
         $text = json_encode($content_to_encode);
-        $crypt = base64_encode(openssl_encrypt($text, 'AES-256-CBC', ENCRYPT_KEY, OPENSSL_RAW_DATA));
+        $crypt = base64_encode(openssl_encrypt($text, 'AES-256-CBC', ENCRYPT_KEY, OPENSSL_RAW_DATA, ""));
         echo $crypt;
     }
 }

@@ -1,11 +1,11 @@
 <?php
+require('Config/config.php');
 
 // Ensure the correct data has been provided
 if (isset($_POST['username']) and isset($_POST['token']))
 {
     // Start the session and include the config
     session_start();
-    require('Config/config.php');
 
     // Prepare the selection to avoid sql injection issues
     $stmt = $connection->prepare("SELECT * FROM `users` WHERE username= ? ");

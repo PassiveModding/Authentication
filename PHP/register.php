@@ -1,4 +1,5 @@
 <?php
+require('Config/config.php');
 
 // Check that the user provided all required data
 if (isset($_POST['username']) and isset($_POST['password']) and isset($_POST['passwordconfirm']) and isset($_POST['email'])) 
@@ -38,7 +39,6 @@ if (isset($_POST['username']) and isset($_POST['password']) and isset($_POST['pa
 
 	// Start the session and include the config
 	session_start();
-	require('Config/config.php');
 
 	// Prepare the selection statement to stop sql injection attacks
 	$stmt = $connection->prepare("SELECT * FROM `users` WHERE username= ? ");
@@ -70,16 +70,25 @@ if (isset($_POST['username']) and isset($_POST['password']) and isset($_POST['pa
 
 	// Hash the user supplied password
 	$hash = password_hash($_POST['password'], PASSWORD_BCRYPT);
+	$account_confirmation = bin2hex(random_bytes(16));
+
+	if (ALLOW_EMAIL_ACCOUNT_CONFIRMATION)
+	{
+		$confirmed = false;
+	}
+	else
+	{
+		$confirmed = true;
+	}
 
 	// Prepare the selection statement to stop sql injection attacks
-	$regstmt = $connection->prepare("INSERT INTO `users`(`username`, `password`, `expiry_date`, `level`, `email`, `registration_date`) VALUES ( ? , ? , CURRENT_TIMESTAMP, 0, ? , CURRENT_TIMESTAMP)");
-	$regstmt->bind_param("sss", $_POST['username'], $hash, $_POST['email']);
+	$regstmt = $connection->prepare("INSERT INTO `users`(`username`, `password`, `expiry_date`, `level`, `email`, `registration_date`, `confirmed_account`, `registration_key`) VALUES ( ? , ? , CURRENT_TIMESTAMP, 0, ? , CURRENT_TIMESTAMP, ? , ?)");
+	$regstmt->bind_param("sssis", $_POST['username'], $hash, $_POST['email'], $confirmed, $account_confirmation);
 	$regstmt->execute();
 	$regresult = $regstmt->get_result();
 
 	// Prepare the selection statement to stop sql injection attacks
 	$getuser = $connection->prepare("SELECT * FROM `users` WHERE `id` = $regstmt->insert_id ");
-	$getuser->bind_param("s", $_POST['username']);
 	$getuser->execute();
 	$getuserresult = $getuser->get_result();
 
@@ -94,6 +103,55 @@ if (isset($_POST['username']) and isset($_POST['password']) and isset($_POST['pa
 	$response->Registration_Date = $reguser['registration_date'];
 	$response->Email = $reguser['email'];
 	$response->Success = true;
+
+	if (ALLOW_EMAIL_ACCOUNT_CONFIRMATION)
+	{
+		// Please change the href to your website in order for this to work
+		$link="<a href='".CONFIRM_PHP_URL."?email=".$reguser['email']."&registration_key=".$account_confirmation."'>Click To Confirm Your Account</a>";
+
+		// Get the PHPMailer stuff so we can send a recovery link to the user's email
+		require('PHPMailer\\Exception.php');
+		require('PHPMailer\\PHPMailer.php');
+		require('PHPMailer\\SMTP.php');
+
+		$mail = new PHPMailer\PHPMailer\PHPMailer;
+		$mail->CharSet =  "utf-8";
+		$mail->IsSMTP();
+		$mail->SMTPAuth = true;   
+		$mail->SMTPSecure = "ssl";  
+		$mail->IsHTML(true);
+
+		// Your email address that will be sending recovery emails
+		$mail->Username = CONFIRM_EMAIL;
+		// The password for that email address
+		$mail->Password = CONFIRM_EMAIL_PASSWORD;
+		// The host of your email ie. SMTP.gmail.com
+		$mail->Host = CONFIRM_EMAIL_HOST;
+		// The port used by your host
+		$mail->Port = CONFIRM_EMAIL_PORT;
+		// This should be the same as your username that was provided
+		$mail->From = CONFIRM_EMAIL;
+		// The name of the user sending
+		$mail->FromName = CONFIRM_EMAIL_DISPLAYNAME;
+		// The user to send to (you don't need to change this one)
+		$mail->AddAddress($reguser['email'], $reguser['username']);
+		// The email subject and body
+		$mail->Subject  =  CONFIRM_EMAIL_SUBJECT;
+		$mail->Body    = 'Hey, '.$reguser['username'].' Click On This Link to Confirm your account! '.$link.'';		
+
+		    
+		if($mail->Send())
+		{
+			$response->SuccessMessage = "Confirmation email has been sent";
+			$response->Success = true;
+		}
+		else
+		{
+			$response->ErrorMessage = "Email error, please contact an administrator";
+			$response->Success = false;
+		}
+	}
+
 	return encodeobject($response);
 } 
 

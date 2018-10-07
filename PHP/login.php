@@ -1,4 +1,6 @@
 <?php
+require('Config/config.php');
+
 // Ensure the correct parameters have been sent
 if (isset($_POST['username']) and isset($_POST['password']))
 {
@@ -20,7 +22,6 @@ if (isset($_POST['username']) and isset($_POST['password']))
 
 	// Begin the session and ensure that the config is included
 	session_start();
-	require('Config/config.php');
 
 	// Prepare the query in order to avoid sql injection attacks
 	$stmt = $connection->prepare("SELECT * FROM `users` WHERE username= ? ");
@@ -48,6 +49,16 @@ if (isset($_POST['username']) and isset($_POST['password']))
 		$response->ErrorMessage = "Invalid Password";
 		$response->Success = false;
 		return encodeobject($response);
+	}
+
+	if (ALLOW_EMAIL_ACCOUNT_CONFIRMATION)
+	{
+		if ($userrow['confirmed_account'] != 1)
+		{
+			$response->ErrorMessage = "Account not confirmed";
+			$response->Success = false;
+			return encodeobject($response);
+		}
 	}
 
 	// Set the response info and attach relevant data

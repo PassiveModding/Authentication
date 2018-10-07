@@ -1,4 +1,7 @@
 <?php
+// Get config from the parent directory
+require(__DIR__.'/../Config/config.php');
+
 if($_GET['key'] && $_GET['reset'])
 {
   if ($_GET['reset'] == NULL)
@@ -8,8 +11,6 @@ if($_GET['key'] && $_GET['reset'])
   else
   {
     session_start();
-    // Get config from the parent directory
-    require(__DIR__.'/../Config/config.php');
     
     $stmt = $connection->prepare("SELECT * FROM `users` WHERE `email` = ? AND `resetkey` = ?");
     $stmt->bind_param("ss", $_GET['key'], $_GET['reset']);

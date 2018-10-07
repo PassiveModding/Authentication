@@ -1,11 +1,12 @@
 <?php
+// Get config from the parent directory
+require(__DIR__.'/../Config/config.php');
+
 // Ensure the correct parameters have been sent
 if (isset($_POST['email']))
 {
 	// Begin the session and ensure that the config is included
     session_start();
-    // Get config from the parent directory
-    require(__DIR__.'/../Config/config.php');
 
 	// Prepare the query in order to avoid sql injection attacks
 	$stmt = $connection->prepare("SELECT * FROM `users` WHERE email = ? ");
@@ -49,9 +50,9 @@ if (isset($_POST['email']))
     $addtolog->execute();
 
     // Get the PHPMailer stuff so we can send a recovery link to the user's email
-    require('PHPMailer\\Exception.php');
-    require('PHPMailer\\PHPMailer.php');
-    require('PHPMailer\\SMTP.php');
+    require(__DIR__.'/../PHPMailer\\Exception.php');
+    require(__DIR__.'/../PHPMailer\\PHPMailer.php');
+    require(__DIR__.'/../PHPMailer\\SMTP.php');
 
     $mail = new PHPMailer\PHPMailer\PHPMailer;
     $mail->CharSet =  "utf-8";
