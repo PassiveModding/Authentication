@@ -1,6 +1,11 @@
 <?php
 require('Config/config.php');
 
+if (!isset($response)) 
+{
+    $response = new stdClass();
+}
+
 // Ensure the correct parameters have been sent
 if (isset($_POST['username']) and isset($_POST['password']))
 {

@@ -1,6 +1,11 @@
 <?php
 require('Config/config.php');
 
+if (!isset($response)) 
+{
+    $response = new stdClass();
+}
+
 // Ensure the correct data has been provided
 if (isset($_POST['username']) and isset($_POST['token']))
 {
@@ -21,6 +26,18 @@ if (isset($_POST['username']) and isset($_POST['token']))
         return encodeobject($response);
     }
 
+    $userrow = $userresult->fetch_assoc();
+
+    if (ALLOW_EMAIL_ACCOUNT_CONFIRMATION)
+    {
+        if ($userrow['confirmed_account'] == false)
+        {
+            $response->ErrorMessage = "Account must be confirmed in order to redeem tokens";
+            $response->Success = false;
+            return encodeobject($response);
+        }
+    }
+
     // Prepare the selection to avoid sql injection issues
     $tokenstmt = $connection->prepare("SELECT * FROM `tokens` WHERE token= ? ");
     $tokenstmt->bind_param("s", $_POST['token']);
@@ -35,7 +52,6 @@ if (isset($_POST['username']) and isset($_POST['token']))
         return encodeobject($response);
     }
 
-    $userrow = $userresult->fetch_assoc();
     $tokenrow = $tokenresult->fetch_assoc();
 
     // If the current expiry time is less that the current time
