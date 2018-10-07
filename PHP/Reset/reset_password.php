@@ -90,7 +90,8 @@ if (isset($_POST['username']) and isset($_POST['current_password']) and isset($_
     $updatestmt = $connection->prepare("UPDATE `users` SET `password` = ? WHERE username = ? ");
     $updatestmt->bind_param("ss", $hash, $_POST['username']);
     $updatestmt->execute();
-    
+	
+	logMessage($userrow['username']." Reset their password", $_SERVER['REMOTE_ADDR'], $userrow['username'], $connection);  
 
 	// Set the response info and attach relevant data
 	// NOTE: You should never include things like the password when returning data back to the user

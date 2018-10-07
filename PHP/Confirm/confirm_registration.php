@@ -38,6 +38,8 @@ if (isset($_GET['email']) AND isset($_GET['registration_key']))
     $updatestmt->bind_param('s', $userrow['id']);
     $updatestmt->execute();
 
+    logMessage($userrow['username']." Confirmed Their Email", $_SERVER['REMOTE_ADDR'], $userrow['username'], $connection);
+
     echo "Successfully confirmed email!";
     return;
 }

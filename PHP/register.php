@@ -159,10 +159,12 @@ if (isset($_POST['username']) and isset($_POST['password']) and isset($_POST['pa
 		}
 		else
 		{
-			$response->ErrorMessage = "Email error, please contact an administrator";
+			$response->ErrorMessage = "Registered, but confirmation email has errors. Please contact an administrator";
 			$response->Success = false;
 		}
 	}
+
+	logMessage($reguser['username']." Registered", $_SERVER['REMOTE_ADDR'], $reguser['username'], $connection);
 
 	return encodeobject($response);
 } 

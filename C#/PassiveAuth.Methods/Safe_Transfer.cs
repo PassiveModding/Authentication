@@ -39,14 +39,21 @@
                 client.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
                 var result = client.UploadString(url, data);
 
-                var useable_content = OpenSSLDecrypt(result);
+                var splitData = result.Split(new[] { "::" }, StringSplitOptions.None);
+                if (splitData.Length == 2)
+                {
+                    var iv = splitData[0];
+                    var useable_content = OpenSSLDecrypt(splitData[1], iv);
 
-                var res = JsonConvert.DeserializeObject<T>(useable_content);
-                return res;
+                    var res = JsonConvert.DeserializeObject<T>(useable_content);
+                    return res;
+                }
+
+                throw new Exception("Invalid response exception.");
             }
         }
 
-        public string OpenSSLDecrypt(string encrypted)
+        public string OpenSSLDecrypt(string encrypted, string iv)
         {
             // get the key bytes (not sure if UTF8 or ASCII should be used here doesn't matter if no extended chars in passphrase)
             var key = Encoding.UTF8.GetBytes(Key_string);
@@ -59,12 +66,9 @@
                 key = paddedkey;
             }
 
-            // setup an empty iv
-            var iv = new byte[16];
-
             // get the encrypted data and decrypt
             byte[] encryptedBytes = Convert.FromBase64String(encrypted);
-            return DecryptStringFromBytesAes(encryptedBytes, key, iv);
+            return DecryptStringFromBytesAes(encryptedBytes, key, Convert.FromBase64String(iv));
         }
 
         public string DecryptStringFromBytesAes(byte[] cipherText, byte[] key, byte[] iv)
@@ -84,7 +88,6 @@
             {
                 throw new ArgumentNullException("iv");
             }
-
 
             // Declare the string used to hold
             // the decrypted text.

@@ -56,10 +56,7 @@ if (isset($_POST['email']))
     $updatestmt->execute();
 
     // Update the reset log table with new data
-    $info = 'Requested password reset';
-    $addtolog = $connection->prepare("INSERT INTO `reset_log` (`ip`, `time`, `email`, `info`) VALUES ( ? , CURRENT_TIMESTAMP , ? , ?)");
-    $addtolog->bind_param("sss", $_SERVER['REMOTE_ADDR'], $_POST['email'], $info);
-    $addtolog->execute();
+    logMessage($userrow['username']." Visited Requested Password Reset", $_SERVER['REMOTE_ADDR'], $userrow['username'], $connection);  
 
     // Get the PHPMailer stuff so we can send a recovery link to the user's email
     require(__DIR__.'/../PHPMailer\\Exception.php');

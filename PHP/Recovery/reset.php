@@ -32,12 +32,8 @@ if($_GET['key'] && $_GET['reset'])
       if ((time() - strtotime($row['resetgenerationtime'])) > 60*5)
       {    
         // Insert a new log event into out reset logs
-        $info = 'Visited expired reset link';
-        $addtolog = $connection->prepare("INSERT INTO `reset_log` (`ip`, `time`, `email`, `info`) VALUES ( ? , CURRENT_TIMESTAMP , ? , ?)");
-        $addtolog->bind_param("sss", $_SERVER['REMOTE_ADDR'], $_POST['key'], $info);
-        $addtolog->execute();
-        $addtolog->get_result();
-  
+        logMessage($row['username']." Visited Expired Reset Link", $_SERVER['REMOTE_ADDR'], $row['username'], $connection);  
+
         // Update the user to make sure that people cannot re-use the reset key
         echo "Expired";
         $expstmt = $connection->prepare("UPDATE `users` SET `resetkey` = NULL, `resetgenerationtime` = NULL WHERE email = ? AND `resetkey` = ?");
@@ -47,14 +43,7 @@ if($_GET['key'] && $_GET['reset'])
       }
       else
       {
-
-        // Insert a new log event into the reset logs
-        $info = 'Visited reset link';
-        $addtolog = $connection->prepare("INSERT INTO `reset_log` (`ip`, `time`, `email`, `info`) VALUES ( ? , CURRENT_TIMESTAMP , ? , ?)");
-        $addtolog->bind_param("sss", $_SERVER['REMOTE_ADDR'], $_POST['key'], $info);
-        $addtolog->execute();
-        $addtolog->get_result();
-  
+        logMessage($row['username']." Visited Reset Link", $_SERVER['REMOTE_ADDR'], $row['username'], $connection);  
 
         // This is the content of the page that will be displayed to the user if they are still resetting the password
         ?>

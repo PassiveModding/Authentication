@@ -39,11 +39,7 @@ if(isset($_POST['password']) AND isset($_POST['key']) AND isset($_POST['reset'])
                 $hash = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
                 // Add a new log to the password reset logs
-                $info = 'Reset password';
-                $addtolog = $connection->prepare("INSERT INTO `reset_log` (`ip`, `time`, `email`, `info`) VALUES ( ? , CURRENT_TIMESTAMP , ? , ?)");
-                $addtolog->bind_param("sss", $_SERVER['REMOTE_ADDR'], $_POST['key'], $info);
-                $addtolog->execute();
-                $addtolog->get_result();
+                logMessage($row['username']." Reset Password", $_SERVER['REMOTE_ADDR'], $row['username'], $connection);  
         
                 // Update the specified user's password and reset the password_reset information
                 $updatestmt = $connection->prepare("UPDATE `users` SET `password` = ?, `resetkey` = NULL, `resetgenerationtime` = NULL WHERE email = ? AND `resetkey` = ?");

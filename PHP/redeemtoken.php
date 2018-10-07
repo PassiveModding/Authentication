@@ -118,6 +118,9 @@ if (isset($_POST['username']) and isset($_POST['token']))
     $removestmt = $connection->prepare("DELETE FROM `tokens` WHERE token = ? ");
     $removestmt->bind_param("s", $_POST['token']);
     $removestmt->execute();
+
+    logMessage($userrow['username']." Redeemed a token (".$_POST['token'].") for ".$tokenrow['years']." Y ".$tokenrow['months']." M ".$tokenrow['weeks']." W ".$tokenrow['days']." D ", $_SERVER['REMOTE_ADDR'], $userrow['username'], $connection);
+
     return encodeobject($response);
 }
 

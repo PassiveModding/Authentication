@@ -83,6 +83,9 @@ if (isset($_POST['username']) and isset($_POST['password']))
 	$response->Registration_Date = $userrow['registration_date'];
 	$response->Email = $userrow['email'];				
 	$response->SuccessMessage = "Successfully logged in";
+
+	logMessage($userrow['username']." Logged In", $_SERVER['REMOTE_ADDR'], $userrow['username'], $connection);
+	
 	return encodeobject($response);	
 }
 

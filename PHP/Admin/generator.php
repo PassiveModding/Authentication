@@ -75,6 +75,9 @@ if (isset($_POST['years']) and isset($_POST['months']) and isset($_POST['weeks']
     $response->Weeks = $_POST['weeks'];
     $response->Days = $_POST['days'];
     $response->Level = $_POST['userlevel'];
+
+    logMessage("ADMIN, generated ".$_POST['quantity']." token(s)", $_SERVER['REMOTE_ADDR'], "ADMIN", $connection);
+
     return encodeobject($response);    
 }
 

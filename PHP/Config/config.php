@@ -42,6 +42,7 @@ define('RESET_EMAIL_PORT', 'EMAIL_PORT_HERE');
 
 define('RESET_EMAIL_DISPLAYNAME', SOFTWARE_NAME.' Password Recovery');
 define('RESET_EMAIL_SUBJECT', 'Reset your '.SOFTWARE_NAME.' Password');
+
 // Update this with the relative URLs of files
 define('RESET_PHP_URL', 'reset.php URL_HERE');
 
@@ -86,9 +87,20 @@ if (!$select_db)
 function encodeobject($content_to_encode) {
     if (isset($content_to_encode))
     {
+        $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('AES-256-CBC'));
         $text = json_encode($content_to_encode);
-        $crypt = base64_encode(openssl_encrypt($text, 'AES-256-CBC', ENCRYPT_KEY, OPENSSL_RAW_DATA, ""));
-        echo $crypt;
+        $crypt = base64_encode(openssl_encrypt($text, 'AES-256-CBC', ENCRYPT_KEY, OPENSSL_RAW_DATA, $iv));
+        echo base64_encode($iv)."::".$crypt;
+    }
+}
+
+function logMessage($message, $ip, $username, mysqli $connection)
+{
+    if (isset($message) AND isset($ip) AND isset($username))
+    {
+        $stmt = $connection->prepare("INSERT INTO `log` (`message`, `ip`, `username`, `time`) VALUES (?, ?, ?, CURRENT_TIMESTAMP)");
+        $stmt->bind_param("sss", $message, $ip, $username);
+        $stmt->execute();
     }
 }
 ?>
