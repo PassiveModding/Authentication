@@ -10,6 +10,11 @@ function generate_serial() {
     ));
 }
 
+if (!isset($response)) 
+{
+    $response = new stdClass();
+}
+
 session_start();
 require(__DIR__.'/../Config/config.php');
 
