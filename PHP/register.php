@@ -6,6 +6,13 @@ if (!isset($response))
     $response = new stdClass();
 }
 
+if (!ALLOW_REGISTRATION)
+{
+	$response->ErrorMessage = "Administrator has denied access to this task"; 
+	$response->Success = false;
+	return encodeobject($response);
+}
+
 // Check that the user provided all required data
 if (isset($_POST['username']) and isset($_POST['password']) and isset($_POST['passwordconfirm']) and isset($_POST['email'])) 
 {	

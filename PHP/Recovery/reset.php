@@ -2,6 +2,12 @@
 // Get config from the parent directory
 require(__DIR__.'/../Config/config.php');
 
+if (!ALLOW_PASSWORD_RECOVERY OR !ALLOW_EMAIL_ACCOUNT_RECOVERY)
+{
+  echo "Administrator has denied access to this task"; 
+  return;
+}
+
 if($_GET['key'] && $_GET['reset'])
 {
   if ($_GET['reset'] == NULL)

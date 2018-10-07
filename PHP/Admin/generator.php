@@ -15,8 +15,16 @@ if (!isset($response))
     $response = new stdClass();
 }
 
-session_start();
 require(__DIR__.'/../Config/config.php');
+
+if (!ALLOW_TOKEN_CREATION)
+{
+	$response->ErrorMessage = "Administrator has denied access to this task"; 
+	$response->Success = false;
+	return encodeobject($response);
+}
+
+session_start();
 
 // Ensure that all the values have been provided
 if (isset($_POST['years']) and isset($_POST['months']) and isset($_POST['weeks']) and isset($_POST['days']) and isset($_POST['quantity']) and isset($_POST['verification']) and isset($_POST['userlevel']))

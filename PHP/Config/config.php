@@ -21,6 +21,16 @@ define('DB_DATABASE', 'DATABASE_NAME_HERE');
 define('ENCRYPT_KEY', 'ANY_RANDOM_STRING');
 
 //------------------------------//
+//        PERMISSION INFO       //
+//------------------------------//
+define('ALLOW_REGISTRATION', true);
+define('ALLOW_LOGIN', true);
+define('ALLOW_TOKEN_REDEMTION', true);
+define('ALLOW_TOKEN_CREATION', true);
+define('ALLOW_PASSWORD_RECOVERY', true);
+define('ALLOW_PASSWORD_RESET', true);
+
+//------------------------------//
 //       RESET MAIL INFO        //
 //------------------------------//
 // Update this content with the information that will be used for password recovery emails

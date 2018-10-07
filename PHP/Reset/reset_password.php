@@ -6,6 +6,13 @@ if (!isset($response))
     $response = new stdClass();
 }
 
+if (!ALLOW_PASSWORD_RESET)
+{
+	$response->ErrorMessage = "Administrator has denied access to this task"; 
+	$response->Success = false;
+	return encodeobject($response);
+}
+
 // Ensure the correct parameters have been sent
 if (isset($_POST['username']) and isset($_POST['current_password']) and isset($_POST['new_password']) and isset($_POST['new_password_confirm']))
 {

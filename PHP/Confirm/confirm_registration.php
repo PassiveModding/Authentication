@@ -2,6 +2,12 @@
 // Get config from the parent directory
 require(__DIR__.'/../Config/config.php');
 
+if (!ALLOW_EMAIL_ACCOUNT_CONFIRMATION)
+{
+	echo "Administrator has denied access to this task"; 
+	return;
+}
+
 // Ensure the correct parameters have been sent
 if (isset($_GET['email']) AND isset($_GET['registration_key']))
 {

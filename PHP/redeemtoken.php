@@ -6,6 +6,13 @@ if (!isset($response))
     $response = new stdClass();
 }
 
+if (!ALLOW_TOKEN_REDEMTION)
+{
+	$response->ErrorMessage = "Administrator has denied access to this task"; 
+	$response->Success = false;
+	return encodeobject($response);
+}
+
 // Ensure the correct data has been provided
 if (isset($_POST['username']) and isset($_POST['token']))
 {
