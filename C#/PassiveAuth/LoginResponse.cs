@@ -36,6 +36,10 @@
         /// </summary>
         public string Email { get; set; }
 
+        public bool Expired { get; set; }
+
+        public TimeSpan Remaining_Time { get; set; }
+
         /// <summary>
         /// Success message in the case that the task succeeds
         /// </summary>

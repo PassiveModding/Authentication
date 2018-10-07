@@ -93,9 +93,45 @@ if (isset($_POST['username']) and isset($_POST['password']) and isset($_POST['pa
 		$confirmed = true;
 	}
 
+	if (USING_TRIAL_PERIOD)
+	{
+		$addontime = 0;
+
+		// Convert all provided values into seconds
+		if (TRIAL_YEARS > 0)
+		{
+			$addontime += 86400 * 365 * TRIAL_YEARS;
+		}
+	
+		if (TRIAL_MONTHS > 0)
+		{
+			$addontime += 86400 * 30 * TRIAL_MONTHS;
+		}
+	
+		if (TRIAL_WEEKS > 0)
+		{
+			$addontime += 86400 * 7 * TRIAL_WEEKS;
+		}
+	
+		if (TRIAL_DAYS > 0)
+		{
+			$addontime += 86400 * TRIAL_DAYS;
+		}
+
+		$date = date('Y-m-d H:i:s', time() + $addontime);
+		$defaultLevel = TRIAL_LEVEL;
+	}
+	else
+	{
+		$date = date('Y-m-d H:i:s', time());
+		$defaultLevel = 0;
+	}
+
+
+	
 	// Prepare the selection statement to stop sql injection attacks
-	$regstmt = $connection->prepare("INSERT INTO `users`(`username`, `password`, `expiry_date`, `level`, `email`, `registration_date`, `confirmed_account`, `registration_key`) VALUES ( ? , ? , CURRENT_TIMESTAMP, 0, ? , CURRENT_TIMESTAMP, ? , ?)");
-	$regstmt->bind_param("sssis", $_POST['username'], $hash, $_POST['email'], $confirmed, $account_confirmation);
+	$regstmt = $connection->prepare("INSERT INTO `users`(`username`, `password`, `expiry_date`, `level`, `email`, `registration_date`, `confirmed_account`, `registration_key`) VALUES ( ? , ? , ? , ? , ? , CURRENT_TIMESTAMP, ? , ?)");
+	$regstmt->bind_param("sssisis", $_POST['username'], $hash, $date, $defaultLevel, $_POST['email'], $confirmed, $account_confirmation);
 	$regstmt->execute();
 	$regresult = $regstmt->get_result();
 

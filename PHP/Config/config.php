@@ -31,6 +31,16 @@ define('ALLOW_PASSWORD_RECOVERY', true);
 define('ALLOW_PASSWORD_RESET', true);
 
 //------------------------------//
+//        TRIAL PERIOD INFO     //
+//------------------------------//
+define('USING_TRIAL_PERIOD', false);
+define('TRIAL_YEARS', 0);
+define('TRIAL_MONTHS', 0);
+define('TRIAL_WEEKS', 0);
+define('TRIAL_DAYS', 0);
+define('TRIAL_LEVEL', 0);
+
+//------------------------------//
 //       RESET MAIL INFO        //
 //------------------------------//
 // Update this content with the information that will be used for password recovery emails

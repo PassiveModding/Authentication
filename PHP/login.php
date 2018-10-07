@@ -1,6 +1,22 @@
 <?php
 require('Config/config.php');
 
+function secondsToTimeInterval($seconds) {
+	$remaining = round($seconds);
+	$days = floor($t/86400);
+	//$day_sec = $days*86400;
+	$remaining -= $days*86400;
+	$hours = floor( $remaining / 3600 );
+	//$hour_sec = $hours*3600;
+	$remaining -= $hours*3600;
+	$minutes = floor( $remaining /60);
+	// $min_sec = $minutes*60;
+	$remaining -= $minutes*60;
+	$sec = $remaining;
+	return sprintf('%02d:%02d:%02d:%02d', $days, $hours, $minutes, $sec);
+  }
+  
+
 if (!isset($response)) 
 {
     $response = new stdClass();
@@ -83,6 +99,8 @@ if (isset($_POST['username']) and isset($_POST['password']))
 	$response->Registration_Date = $userrow['registration_date'];
 	$response->Email = $userrow['email'];				
 	$response->SuccessMessage = "Successfully logged in";
+	$response->Expired = (time() - strtotime($userrow['expiry_date'])) > 0;
+	$response->Remaining_Time = secondsToTimeInterval(strtotime($userrow['expiry_date']) - time());
 
 	logMessage($userrow['username']." Logged In", $_SERVER['REMOTE_ADDR'], $userrow['username'], $connection);
 	
