@@ -7,6 +7,8 @@
 
     using MetroFramework.Forms;
 
+    using PassiveAuth.Admin;
+
     /// <summary>
     /// An example form demonstrating usage of PassiveAuth
     /// </summary>
@@ -28,6 +30,7 @@
             "http://localhost/php_deploy/login.php", 
             "http://localhost/php_deploy/register.php",
             "http://localhost/php_deploy/redeemtoken.php", 
+            "http://localhost/php_deploy/Reset/reset_password.php", 
             "http://localhost/php_deploy/Recovery/recover.php",
             "ANY_RANDOM_STRING");
         public AdminAuthWorker AdminWorker { get; set; } = new AdminAuthWorker(
@@ -140,6 +143,27 @@
             try
             {
                 Worker.Recover(recoverEmail.Text);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.ToString());
+            }
+        }
+
+        private void ConfirmReset_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var passwordResetResponse = Worker.ResetPassword(ResetUsername.Text, ResetPassword.Text, ResetNewPassword.Text, ResetConfirmNewPassword.Text);
+
+                if (passwordResetResponse.Success)
+                {
+                    MessageBox.Show(passwordResetResponse.SuccessMessage);
+                }
+                else
+                {
+                    MessageBox.Show(passwordResetResponse.ErrorMessage);
+                }
             }
             catch (Exception exception)
             {

@@ -1,7 +1,9 @@
-﻿namespace PassiveAuth
+﻿namespace PassiveAuth.Admin
 {
     using System;
     using System.Collections.Generic;
+
+    using PassiveAuth.Methods;
 
     public class AdminAuthWorker
     {

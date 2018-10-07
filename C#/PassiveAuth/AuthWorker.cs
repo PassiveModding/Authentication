@@ -3,6 +3,8 @@
     using System;
     using System.Collections.Generic;
 
+    using PassiveAuth.Methods;
+
     public class AuthWorker
     {
         /// <summary>
@@ -23,12 +25,13 @@
         /// <param name="key">
         /// The encryption key, MUST Match that set in config.php
         /// </param>
-        public AuthWorker(string loginUrl, string registerUrl, string tokenRedemptionUrl, string recoverUrl, string key)
+        public AuthWorker(string loginUrl, string registerUrl, string tokenRedemptionUrl, string resetPasswordUrl, string recoverUrl, string key)
         {
             LoginUrl = loginUrl;
             RegisterUrl = registerUrl;
             TokenRedemptionUrl = tokenRedemptionUrl;
             RecoverUrl = recoverUrl;
+            ResetPasswordUrl = resetPasswordUrl;
             Safe = new Safe_Transfer(key);
         }
 
@@ -37,6 +40,7 @@
         private string RegisterUrl { get; }
         private string LoginUrl { get; }
         private string TokenRedemptionUrl { get; }
+        private string ResetPasswordUrl { get; }
 
         /// <summary>
         /// Tries to login via login.php
@@ -80,6 +84,18 @@
                                                                                new Tuple<string, string>("passwordconfirm", passwordConfirm),
                                                                                new Tuple<string, string>("email", email),
                                                                            });
+            return res;
+        }
+
+        public PasswordResetResponse ResetPassword(string username, string old_password, string new_password, string new_password_confirm)
+        {
+            var res = Safe.GetFromFile<PasswordResetResponse>(ResetPasswordUrl, new List<Tuple<string, string>>
+                                                                              {
+                                                                                  new Tuple<string, string>("username", username), 
+                                                                                  new Tuple<string, string>("current_password", old_password),
+                                                                                  new Tuple<string, string>("new_password", new_password),
+                                                                                  new Tuple<string, string>("new_password_confirm", new_password_confirm)
+                                                                              });
             return res;
         }
         

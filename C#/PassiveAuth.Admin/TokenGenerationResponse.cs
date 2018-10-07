@@ -1,4 +1,4 @@
-﻿namespace PassiveAuth
+﻿namespace PassiveAuth.Admin
 {
     using System.Collections.Generic;
 

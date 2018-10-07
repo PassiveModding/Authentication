@@ -71,6 +71,16 @@
             this.AddToken = new MetroFramework.Controls.MetroButton();
             this.userinfo = new MetroFramework.Controls.MetroLabel();
             this.DataRefresh = new System.Windows.Forms.Timer(this.components);
+            this.metroTabPage5 = new MetroFramework.Controls.MetroTabPage();
+            this.ConfirmReset = new MetroFramework.Controls.MetroButton();
+            this.ResetPassword = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel16 = new MetroFramework.Controls.MetroLabel();
+            this.ResetUsername = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel17 = new MetroFramework.Controls.MetroLabel();
+            this.ResetConfirmNewPassword = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel18 = new MetroFramework.Controls.MetroLabel();
+            this.ResetNewPassword = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel19 = new MetroFramework.Controls.MetroLabel();
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage3.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
@@ -82,18 +92,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.monthcount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.weekcount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.daycount)).BeginInit();
+            this.metroTabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroTabControl1
             // 
-            this.metroTabControl1.Controls.Add(this.metroTabPage3);
             this.metroTabControl1.Controls.Add(this.metroTabPage1);
             this.metroTabControl1.Controls.Add(this.metroTabPage2);
+            this.metroTabControl1.Controls.Add(this.metroTabPage3);
+            this.metroTabControl1.Controls.Add(this.metroTabPage5);
             this.metroTabControl1.Controls.Add(this.metroTabPage4);
             this.metroTabControl1.Location = new System.Drawing.Point(24, 64);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 2;
-            this.metroTabControl1.Size = new System.Drawing.Size(297, 274);
+            this.metroTabControl1.SelectedIndex = 0;
+            this.metroTabControl1.Size = new System.Drawing.Size(408, 274);
             this.metroTabControl1.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTabControl1.TabIndex = 0;
             this.metroTabControl1.Theme = MetroFramework.MetroThemeStyle.Dark;
@@ -110,7 +122,7 @@
             this.metroTabPage3.HorizontalScrollbarSize = 10;
             this.metroTabPage3.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage3.Name = "metroTabPage3";
-            this.metroTabPage3.Size = new System.Drawing.Size(289, 232);
+            this.metroTabPage3.Size = new System.Drawing.Size(400, 232);
             this.metroTabPage3.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTabPage3.TabIndex = 4;
             this.metroTabPage3.Text = "Recover";
@@ -193,7 +205,7 @@
             this.metroTabPage1.HorizontalScrollbarSize = 10;
             this.metroTabPage1.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage1.Name = "metroTabPage1";
-            this.metroTabPage1.Size = new System.Drawing.Size(289, 232);
+            this.metroTabPage1.Size = new System.Drawing.Size(400, 232);
             this.metroTabPage1.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTabPage1.TabIndex = 0;
             this.metroTabPage1.Text = "Login";
@@ -381,7 +393,7 @@
             this.metroTabPage2.HorizontalScrollbarSize = 10;
             this.metroTabPage2.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage2.Name = "metroTabPage2";
-            this.metroTabPage2.Size = new System.Drawing.Size(289, 232);
+            this.metroTabPage2.Size = new System.Drawing.Size(400, 232);
             this.metroTabPage2.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTabPage2.TabIndex = 1;
             this.metroTabPage2.Text = "Register";
@@ -616,7 +628,7 @@
             this.metroTabPage4.HorizontalScrollbarSize = 10;
             this.metroTabPage4.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage4.Name = "metroTabPage4";
-            this.metroTabPage4.Size = new System.Drawing.Size(289, 232);
+            this.metroTabPage4.Size = new System.Drawing.Size(400, 232);
             this.metroTabPage4.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTabPage4.TabIndex = 3;
             this.metroTabPage4.Text = "Admin";
@@ -841,7 +853,7 @@
             // userinfo
             // 
             this.userinfo.AutoSize = true;
-            this.userinfo.Location = new System.Drawing.Point(327, 64);
+            this.userinfo.Location = new System.Drawing.Point(438, 64);
             this.userinfo.Name = "userinfo";
             this.userinfo.Size = new System.Drawing.Size(71, 19);
             this.userinfo.Style = MetroFramework.MetroColorStyle.Blue;
@@ -854,6 +866,228 @@
             // 
             this.DataRefresh.Enabled = true;
             this.DataRefresh.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // metroTabPage5
+            // 
+            this.metroTabPage5.Controls.Add(this.ResetConfirmNewPassword);
+            this.metroTabPage5.Controls.Add(this.metroLabel18);
+            this.metroTabPage5.Controls.Add(this.ResetNewPassword);
+            this.metroTabPage5.Controls.Add(this.metroLabel19);
+            this.metroTabPage5.Controls.Add(this.ConfirmReset);
+            this.metroTabPage5.Controls.Add(this.ResetPassword);
+            this.metroTabPage5.Controls.Add(this.metroLabel16);
+            this.metroTabPage5.Controls.Add(this.ResetUsername);
+            this.metroTabPage5.Controls.Add(this.metroLabel17);
+            this.metroTabPage5.HorizontalScrollbarBarColor = true;
+            this.metroTabPage5.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPage5.HorizontalScrollbarSize = 10;
+            this.metroTabPage5.Location = new System.Drawing.Point(4, 38);
+            this.metroTabPage5.Name = "metroTabPage5";
+            this.metroTabPage5.Size = new System.Drawing.Size(400, 232);
+            this.metroTabPage5.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTabPage5.TabIndex = 5;
+            this.metroTabPage5.Text = "Reset Password";
+            this.metroTabPage5.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroTabPage5.UseStyleColors = true;
+            this.metroTabPage5.VerticalScrollbarBarColor = true;
+            this.metroTabPage5.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPage5.VerticalScrollbarSize = 10;
+            // 
+            // ConfirmReset
+            // 
+            this.ConfirmReset.Location = new System.Drawing.Point(3, 199);
+            this.ConfirmReset.Name = "ConfirmReset";
+            this.ConfirmReset.Size = new System.Drawing.Size(185, 23);
+            this.ConfirmReset.Style = MetroFramework.MetroColorStyle.Blue;
+            this.ConfirmReset.TabIndex = 11;
+            this.ConfirmReset.Text = "Reset Password";
+            this.ConfirmReset.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.ConfirmReset.UseSelectable = true;
+            this.ConfirmReset.UseStyleColors = true;
+            this.ConfirmReset.Click += new System.EventHandler(this.ConfirmReset_Click);
+            // 
+            // ResetPassword
+            // 
+            // 
+            // 
+            // 
+            this.ResetPassword.CustomButton.Image = null;
+            this.ResetPassword.CustomButton.Location = new System.Drawing.Point(163, 1);
+            this.ResetPassword.CustomButton.Name = "";
+            this.ResetPassword.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.ResetPassword.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.ResetPassword.CustomButton.TabIndex = 1;
+            this.ResetPassword.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.ResetPassword.CustomButton.UseSelectable = true;
+            this.ResetPassword.CustomButton.Visible = false;
+            this.ResetPassword.Lines = new string[0];
+            this.ResetPassword.Location = new System.Drawing.Point(3, 72);
+            this.ResetPassword.MaxLength = 32767;
+            this.ResetPassword.Name = "ResetPassword";
+            this.ResetPassword.PasswordChar = '●';
+            this.ResetPassword.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.ResetPassword.SelectedText = "";
+            this.ResetPassword.SelectionLength = 0;
+            this.ResetPassword.SelectionStart = 0;
+            this.ResetPassword.ShortcutsEnabled = true;
+            this.ResetPassword.Size = new System.Drawing.Size(185, 23);
+            this.ResetPassword.Style = MetroFramework.MetroColorStyle.Blue;
+            this.ResetPassword.TabIndex = 10;
+            this.ResetPassword.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.ResetPassword.UseSelectable = true;
+            this.ResetPassword.UseStyleColors = true;
+            this.ResetPassword.UseSystemPasswordChar = true;
+            this.ResetPassword.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.ResetPassword.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // metroLabel16
+            // 
+            this.metroLabel16.AutoSize = true;
+            this.metroLabel16.Location = new System.Drawing.Point(3, 49);
+            this.metroLabel16.Name = "metroLabel16";
+            this.metroLabel16.Size = new System.Drawing.Size(66, 19);
+            this.metroLabel16.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroLabel16.TabIndex = 9;
+            this.metroLabel16.Text = "Password:";
+            this.metroLabel16.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroLabel16.UseStyleColors = true;
+            // 
+            // ResetUsername
+            // 
+            // 
+            // 
+            // 
+            this.ResetUsername.CustomButton.Image = null;
+            this.ResetUsername.CustomButton.Location = new System.Drawing.Point(163, 1);
+            this.ResetUsername.CustomButton.Name = "";
+            this.ResetUsername.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.ResetUsername.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.ResetUsername.CustomButton.TabIndex = 1;
+            this.ResetUsername.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.ResetUsername.CustomButton.UseSelectable = true;
+            this.ResetUsername.CustomButton.Visible = false;
+            this.ResetUsername.Lines = new string[0];
+            this.ResetUsername.Location = new System.Drawing.Point(3, 23);
+            this.ResetUsername.MaxLength = 32767;
+            this.ResetUsername.Name = "ResetUsername";
+            this.ResetUsername.PasswordChar = '\0';
+            this.ResetUsername.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.ResetUsername.SelectedText = "";
+            this.ResetUsername.SelectionLength = 0;
+            this.ResetUsername.SelectionStart = 0;
+            this.ResetUsername.ShortcutsEnabled = true;
+            this.ResetUsername.Size = new System.Drawing.Size(185, 23);
+            this.ResetUsername.Style = MetroFramework.MetroColorStyle.Blue;
+            this.ResetUsername.TabIndex = 8;
+            this.ResetUsername.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.ResetUsername.UseSelectable = true;
+            this.ResetUsername.UseStyleColors = true;
+            this.ResetUsername.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.ResetUsername.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // metroLabel17
+            // 
+            this.metroLabel17.AutoSize = true;
+            this.metroLabel17.Location = new System.Drawing.Point(3, 0);
+            this.metroLabel17.Name = "metroLabel17";
+            this.metroLabel17.Size = new System.Drawing.Size(71, 19);
+            this.metroLabel17.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroLabel17.TabIndex = 7;
+            this.metroLabel17.Text = "Username:";
+            this.metroLabel17.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroLabel17.UseStyleColors = true;
+            // 
+            // ResetConfirmNewPassword
+            // 
+            // 
+            // 
+            // 
+            this.ResetConfirmNewPassword.CustomButton.Image = null;
+            this.ResetConfirmNewPassword.CustomButton.Location = new System.Drawing.Point(163, 1);
+            this.ResetConfirmNewPassword.CustomButton.Name = "";
+            this.ResetConfirmNewPassword.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.ResetConfirmNewPassword.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.ResetConfirmNewPassword.CustomButton.TabIndex = 1;
+            this.ResetConfirmNewPassword.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.ResetConfirmNewPassword.CustomButton.UseSelectable = true;
+            this.ResetConfirmNewPassword.CustomButton.Visible = false;
+            this.ResetConfirmNewPassword.Lines = new string[0];
+            this.ResetConfirmNewPassword.Location = new System.Drawing.Point(3, 170);
+            this.ResetConfirmNewPassword.MaxLength = 32767;
+            this.ResetConfirmNewPassword.Name = "ResetConfirmNewPassword";
+            this.ResetConfirmNewPassword.PasswordChar = '●';
+            this.ResetConfirmNewPassword.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.ResetConfirmNewPassword.SelectedText = "";
+            this.ResetConfirmNewPassword.SelectionLength = 0;
+            this.ResetConfirmNewPassword.SelectionStart = 0;
+            this.ResetConfirmNewPassword.ShortcutsEnabled = true;
+            this.ResetConfirmNewPassword.Size = new System.Drawing.Size(185, 23);
+            this.ResetConfirmNewPassword.Style = MetroFramework.MetroColorStyle.Blue;
+            this.ResetConfirmNewPassword.TabIndex = 17;
+            this.ResetConfirmNewPassword.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.ResetConfirmNewPassword.UseSelectable = true;
+            this.ResetConfirmNewPassword.UseStyleColors = true;
+            this.ResetConfirmNewPassword.UseSystemPasswordChar = true;
+            this.ResetConfirmNewPassword.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.ResetConfirmNewPassword.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // metroLabel18
+            // 
+            this.metroLabel18.AutoSize = true;
+            this.metroLabel18.Location = new System.Drawing.Point(3, 147);
+            this.metroLabel18.Name = "metroLabel18";
+            this.metroLabel18.Size = new System.Drawing.Size(148, 19);
+            this.metroLabel18.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroLabel18.TabIndex = 16;
+            this.metroLabel18.Text = "Confirm New Password:";
+            this.metroLabel18.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroLabel18.UseStyleColors = true;
+            // 
+            // ResetNewPassword
+            // 
+            // 
+            // 
+            // 
+            this.ResetNewPassword.CustomButton.Image = null;
+            this.ResetNewPassword.CustomButton.Location = new System.Drawing.Point(163, 1);
+            this.ResetNewPassword.CustomButton.Name = "";
+            this.ResetNewPassword.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.ResetNewPassword.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.ResetNewPassword.CustomButton.TabIndex = 1;
+            this.ResetNewPassword.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.ResetNewPassword.CustomButton.UseSelectable = true;
+            this.ResetNewPassword.CustomButton.Visible = false;
+            this.ResetNewPassword.Lines = new string[0];
+            this.ResetNewPassword.Location = new System.Drawing.Point(3, 121);
+            this.ResetNewPassword.MaxLength = 32767;
+            this.ResetNewPassword.Name = "ResetNewPassword";
+            this.ResetNewPassword.PasswordChar = '●';
+            this.ResetNewPassword.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.ResetNewPassword.SelectedText = "";
+            this.ResetNewPassword.SelectionLength = 0;
+            this.ResetNewPassword.SelectionStart = 0;
+            this.ResetNewPassword.ShortcutsEnabled = true;
+            this.ResetNewPassword.Size = new System.Drawing.Size(185, 23);
+            this.ResetNewPassword.Style = MetroFramework.MetroColorStyle.Blue;
+            this.ResetNewPassword.TabIndex = 15;
+            this.ResetNewPassword.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.ResetNewPassword.UseSelectable = true;
+            this.ResetNewPassword.UseStyleColors = true;
+            this.ResetNewPassword.UseSystemPasswordChar = true;
+            this.ResetNewPassword.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.ResetNewPassword.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // metroLabel19
+            // 
+            this.metroLabel19.AutoSize = true;
+            this.metroLabel19.Location = new System.Drawing.Point(3, 98);
+            this.metroLabel19.Name = "metroLabel19";
+            this.metroLabel19.Size = new System.Drawing.Size(96, 19);
+            this.metroLabel19.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroLabel19.TabIndex = 14;
+            this.metroLabel19.Text = "New Password:";
+            this.metroLabel19.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroLabel19.UseStyleColors = true;
             // 
             // Login
             // 
@@ -881,6 +1115,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.monthcount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.weekcount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.daycount)).EndInit();
+            this.metroTabPage5.ResumeLayout(false);
+            this.metroTabPage5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -930,6 +1166,16 @@
         private MetroFramework.Controls.MetroButton RecoverSubmit;
         private MetroFramework.Controls.MetroTextBox recoverEmail;
         private MetroFramework.Controls.MetroLabel metroLabel15;
+        private MetroFramework.Controls.MetroTabPage metroTabPage5;
+        private MetroFramework.Controls.MetroTextBox ResetConfirmNewPassword;
+        private MetroFramework.Controls.MetroLabel metroLabel18;
+        private MetroFramework.Controls.MetroTextBox ResetNewPassword;
+        private MetroFramework.Controls.MetroLabel metroLabel19;
+        private MetroFramework.Controls.MetroButton ConfirmReset;
+        private MetroFramework.Controls.MetroTextBox ResetPassword;
+        private MetroFramework.Controls.MetroLabel metroLabel16;
+        private MetroFramework.Controls.MetroTextBox ResetUsername;
+        private MetroFramework.Controls.MetroLabel metroLabel17;
     }
 }
 

@@ -5,6 +5,12 @@ VisualStudioVersion = 15.0.28010.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoginForm", "LoginForm\LoginForm.csproj", "{3CB7B97E-74A9-462A-B828-A9315E85F04E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassiveAuth", "PassiveAuth\PassiveAuth.csproj", "{BACCAC53-129E-49B9-84F4-0C93184C6B7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassiveAuth.Admin", "PassiveAuth.Admin\PassiveAuth.Admin.csproj", "{35203781-D883-46ED-9C04-90BB1E5B0CE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassiveAuth.Methods", "PassiveAuth.Methods\PassiveAuth.Methods.csproj", "{CA480DF2-1EB0-4D91-8C18-7C542A16268D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{3CB7B97E-74A9-462A-B828-A9315E85F04E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3CB7B97E-74A9-462A-B828-A9315E85F04E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3CB7B97E-74A9-462A-B828-A9315E85F04E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BACCAC53-129E-49B9-84F4-0C93184C6B7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BACCAC53-129E-49B9-84F4-0C93184C6B7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BACCAC53-129E-49B9-84F4-0C93184C6B7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BACCAC53-129E-49B9-84F4-0C93184C6B7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35203781-D883-46ED-9C04-90BB1E5B0CE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35203781-D883-46ED-9C04-90BB1E5B0CE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35203781-D883-46ED-9C04-90BB1E5B0CE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35203781-D883-46ED-9C04-90BB1E5B0CE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA480DF2-1EB0-4D91-8C18-7C542A16268D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA480DF2-1EB0-4D91-8C18-7C542A16268D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA480DF2-1EB0-4D91-8C18-7C542A16268D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA480DF2-1EB0-4D91-8C18-7C542A16268D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
