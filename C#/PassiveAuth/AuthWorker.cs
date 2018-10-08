@@ -103,12 +103,13 @@
         /// Initializes a password recovery for the specified email address
         /// </summary>
         /// <param name="email"></param>
-        public void Recover(string email)
+        public PasswordRecoveryResponse Recover(string email)
         {
-            Safe.SecureRun(RecoverUrl, new List<Tuple<string, string>>
+            var res = Safe.GetFromFile<PasswordRecoveryResponse>(RecoverUrl, new List<Tuple<string, string>>
                                                                    {
                                                                        new Tuple<string, string>("email", email),
                                                                    });
+            return res;
         }
 
         /// <summary>

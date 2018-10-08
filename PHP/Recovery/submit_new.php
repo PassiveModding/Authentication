@@ -42,7 +42,7 @@ if(isset($_POST['password']) AND isset($_POST['key']) AND isset($_POST['reset'])
                 logMessage($row['username']." Reset Password", $_SERVER['REMOTE_ADDR'], $row['username'], $connection);  
         
                 // Update the specified user's password and reset the password_reset information
-                $updatestmt = $connection->prepare("UPDATE `users` SET `password` = ?, `resetkey` = NULL, `resetgenerationtime` = NULL WHERE email = ? AND `resetkey` = ?");
+                $updatestmt = $connection->prepare("UPDATE `users` SET `password` = ?, `resetkey` = NULL, `resetgenerationtime` = NULL, `login_attempts` = 0, `emailed_suspicious_activity` = 0 WHERE email = ? AND `resetkey` = ?");
                 $updatestmt->bind_param("sss", $hash, $_POST['key'], $_POST['reset']);
                 $updatestmt->execute();
 

@@ -142,7 +142,16 @@
         {
             try
             {
-                Worker.Recover(recoverEmail.Text);
+                var res = Worker.Recover(recoverEmail.Text);
+
+                if (res.Success)
+                {
+                    MessageBox.Show(res.SuccessMessage);
+                }
+                else
+                {
+                    MessageBox.Show(res.ErrorMessage);
+                }
             }
             catch (Exception exception)
             {

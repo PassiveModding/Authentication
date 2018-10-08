@@ -41,6 +41,14 @@ define('TRIAL_DAYS', 0);
 define('TRIAL_LEVEL', 0);
 
 //------------------------------//
+//        SECURITY INFO         //
+//------------------------------//
+// 0 = disabled
+define('MAX_LOGIN_ATTEMPTS', 5);
+// NOTE: Requires ALLOW_EMAIL_ACCOUNT_RECOVERY = true
+define('NOTIFY_USER_ON_MAX_ATTEMPTS', true);
+
+//------------------------------//
 //       RESET MAIL INFO        //
 //------------------------------//
 // Update this content with the information that will be used for password recovery emails

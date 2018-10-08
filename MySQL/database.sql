@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 07, 2018 at 12:18 PM
+-- Generation Time: Oct 08, 2018 at 07:12 AM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `MY_DATABASE`
+-- Database: `MYDB`
 --
 
 -- --------------------------------------------------------
@@ -69,7 +69,10 @@ CREATE TABLE `users` (
   `resetkey` varchar(120) DEFAULT NULL,
   `resetgenerationtime` datetime DEFAULT CURRENT_TIMESTAMP,
   `registration_key` varchar(120) NOT NULL,
-  `confirmed_account` tinyint(1) NOT NULL DEFAULT '0'
+  `confirmed_account` tinyint(1) NOT NULL DEFAULT '0',
+  `last_ip` varchar(60) DEFAULT NULL,
+  `login_attempts` int(11) NOT NULL DEFAULT '0',
+  `emailed_suspicious_activity` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -104,7 +107,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `tokens`
@@ -116,7 +119,7 @@ ALTER TABLE `tokens`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

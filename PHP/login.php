@@ -3,14 +3,11 @@ require('Config/config.php');
 
 function secondsToTimeInterval($seconds) {
 	$remaining = round($seconds);
-	$days = floor($t/86400);
-	//$day_sec = $days*86400;
+	$days = floor($remaining/86400);
 	$remaining -= $days*86400;
 	$hours = floor( $remaining / 3600 );
-	//$hour_sec = $hours*3600;
 	$remaining -= $hours*3600;
 	$minutes = floor( $remaining /60);
-	// $min_sec = $minutes*60;
 	$remaining -= $minutes*60;
 	$sec = $remaining;
 	return sprintf('%02d:%02d:%02d:%02d', $days, $hours, $minutes, $sec);
@@ -68,6 +65,55 @@ if (isset($_POST['username']) and isset($_POST['password']))
 	// Get the row associated with the user
 	$userrow = $result->fetch_assoc();
 
+	if ($userrow['login_attempts'] >= MAX_LOGIN_ATTEMPTS AND MAX_LOGIN_ATTEMPTS > 0)
+	{
+		$response->ErrorMessage = "You have exceeded the maximum login attempts";
+		$response->Success = false;
+
+		if (NOTIFY_USER_ON_MAX_ATTEMPTS AND ALLOW_EMAIL_ACCOUNT_RECOVERY AND ($userrow['emailed_suspicious_activity'] == false))
+		{
+			// Get the PHPMailer stuff so we can send a recovery link to the user's email
+			require('PHPMailer\\Exception.php');
+			require('PHPMailer\\PHPMailer.php');
+			require('PHPMailer\\SMTP.php');
+
+			$mail = new PHPMailer\PHPMailer\PHPMailer;
+			$mail->CharSet =  "utf-8";
+			$mail->IsSMTP();
+			$mail->SMTPAuth = true;   
+			$mail->SMTPSecure = "ssl";  
+			$mail->IsHTML(true);
+
+			// Your email address that will be sending recovery emails
+			$mail->Username = RESET_EMAIL;
+			// The password for that email address
+			$mail->Password = RESET_EMAIL_PASSWORD;
+			// The host of your email ie. SMTP.gmail.com
+			$mail->Host = RESET_EMAIL_HOST;
+			// The port used by your host
+			$mail->Port = RESET_EMAIL_PORT;
+			// This should be the same as your username that was provided
+			$mail->From = RESET_EMAIL;
+			// The name of the user sending
+			$mail->FromName = RESET_EMAIL_DISPLAYNAME;
+			// The user to send to (you don't need to change this one)
+			$mail->AddAddress($userrow['email'], $userrow['username']);
+			// The email subject and body
+			$mail->Subject  =  "Suspicious Activity on your ".SOFTWARE_NAME." Account";
+			$mail->Body     = 'Hey, '.$userrow['username'].' We have detected suspicious login attempts on your account from the IP address:'.$_SERVER['REMOTE_ADDR'].' and subsequently locked your account, it is recommended that you reset your password immediately through the software!';		
+			$mail->Send();
+
+			// Make sure that you don't spam the user with emails
+			$updatestmt = $connection->prepare("UPDATE `users` SET `emailed_suspicious_activity` = 1 WHERE `username` = ? ");
+			$updatestmt->bind_param("s", $_POST['username']);
+			$updatestmt->execute();
+
+		}
+
+		return encodeobject($response);
+	}
+
+
 	// This is the currenly stored hash of the users password
 	$hash = $userrow['password'];
 	
@@ -76,7 +122,22 @@ if (isset($_POST['username']) and isset($_POST['password']))
 	{
 		$response->ErrorMessage = "Invalid Password";
 		$response->Success = false;
+
+		$current_attempts = $userrow['login_attempts'] + 1;
+
+		// Update the specified user's login attempt count if they enter the wrong password
+		$updatestmt = $connection->prepare("UPDATE `users` SET `login_attempts` = ? WHERE `username` = ? ");
+		$updatestmt->bind_param("is", $current_attempts, $_POST['username']);
+		$updatestmt->execute();
+	
 		return encodeobject($response);
+	}
+	else
+	{
+		// Reset if password is correct.
+		$updatestmt = $connection->prepare("UPDATE `users` SET `login_attempts` = 0, `emailed_suspicious_activity` = 0, `last_ip` = ? WHERE `username` = ? ");
+		$updatestmt->bind_param("ss", $_SERVER['REMOTE_ADDR'], $_POST['username']);
+		$updatestmt->execute();
 	}
 
 	if (ALLOW_EMAIL_ACCOUNT_CONFIRMATION)

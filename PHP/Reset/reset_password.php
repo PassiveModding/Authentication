@@ -68,6 +68,13 @@ if (isset($_POST['username']) and isset($_POST['current_password']) and isset($_
 	// Get the row associated with the user
 	$userrow = $result->fetch_assoc();
 
+	if ($userrow['login_attempts'] >= MAX_LOGIN_ATTEMPTS AND MAX_LOGIN_ATTEMPTS > 0)
+	{
+		$response->ErrorMessage = "Account is locked.";
+		$response->Success = false;
+		return encodeobject($response);
+	}
+
 	// Verify that the hash matches the user supplied original password
 	if (!password_verify($_POST['current_password'], $userrow['password']))
 	{

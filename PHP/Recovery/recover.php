@@ -32,6 +32,7 @@ if (isset($_POST['email']))
         // NOTE This is a lie
         // However we return this with any email provided in order to try and deny malicious users
         // Any any possible information about user emails
+        $response->Email = $_POST['email'];
         $response->SuccessMessage = "Email has been sent";
         $response->Success = true;
         return encodeobject($response);
@@ -90,11 +91,13 @@ if (isset($_POST['email']))
     
     if($mail->Send())
     {
+        $response->Email = $_POST['email'];
         $response->SuccessMessage = "Email has been sent";
         $response->Success = true;
     }
     else
     {
+        $response->Email = $_POST['email'];
         $response->ErrorMessage = "Email error, please contact an administrator";
         $response->Success = false;
     }
@@ -102,6 +105,7 @@ if (isset($_POST['email']))
     return encodeobject($response);
 }
 
+$response->Email = $_POST['email'];
 $response->ErrorMessage = "Invalid Parameters provided";
 $response->Success = false;
 return encodeobject($response);
